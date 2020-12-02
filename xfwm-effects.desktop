@@ -1,0 +1,10 @@
+[Desktop Entry]
+	Name=Xfwm Effects
+    Comment=Adds Depth to the Desktop
+	Exec=xfwm-effects
+	Terminal=false
+	Type=Application
+    Icon=/usr/local/share/xfwm-effects/xfwm-effects.svg
+	Categories=XFCE;GTK;Settings;DesktopSettings;X-XFCE-SettingsDialog;X-XFCE-PersonalSettings;
+	OnlyShowIn=XFCE;
+
