@@ -1,6 +1,14 @@
 # xfce-blur-effects
 
-Note : ALl credits goes to Kalideva. This package is just a port of xfce-effects to Archlinux
+#Note : 
+
+This is a shameless copy of James Hoover's XFCE Effects. 
+
+All credits goes to Kalideva. This package is just a port of xfce-effects to Archlinux
+
+Visit : https://www.kalideva.com/ for more details. 
+
+I have included the below steps which is similar to the original package.
  
  # Xfwm Effects 1.3
 
@@ -47,9 +55,6 @@ in the settings app.
 Xfwm4 version 4.15.1. Xfwm4 is the Xfce4 desktop environment's window 
 manager. 'xfce4-about' in a terminal to see what version you have.
 
-The installer script is written for Xubuntu 20.04; other distros will need 
-some massaging to get xfwm-effects to work.
-
 ## Included is:
 
 -xfwm4 (hacked version)
@@ -64,7 +69,7 @@ Imlib2 (the libimlib2 package) for image processing
 Before you begin, run Software Updater and install any needed 
 updates.
 
-1) extract the archived folder (xfwm-effects.tar.gz) containing the 
+1) extract the archived folder (xfwm-blur-effects-main.zip) containing the 
 needed files, which include:
 
 -README.txt
@@ -77,18 +82,15 @@ needed files, which include:
 -xfwm-effects-install.sh
 
 2) open a terminal window, "cd" to the file path of the install folder you 
-just unarchived:
-
-cd /home/user/Downloads/xfwm-effects-install-1.3
-
-the above is just an example; your "user" is different!
-
-and type:
+just unarchived and type:
 
 sudo bash xfwm-effects-install.sh 
 or
-
 sudo ./xfwm-effects-install.sh 
+
+If it doesn't work, then type the below command before bash execution: 
+
+chmod +x xfwm-effects-install.sh 
 
 then enter your password if prompted.
 
@@ -97,8 +99,8 @@ not root
 -it will also install the imlib2 library, needed for image processing, 
 using apt-get (it may prompt you to type "y" for "yes" to approve this).
 
-if Xubuntu is running on real hardware, log out and log back in at 
-this point. This action does not appear to be necessary when Xubuntu 
+if OS is running on real hardware, log out and log back in at 
+this point. This action does not appear to be necessary when OS 
 is running on a virtual machine.
 
 3) now to start the effect, in a terminal window, type: 
@@ -128,52 +130,6 @@ Also note: some apps have their own transparency settings, such as Whisker
 menu and the Xfce4 panel. Changing the 'opacity' level for these apps in 
 their properties settings will adjust the effect.
 
-## How to build from source code (for xfwm4 4.15.1 on Xubuntu 20.04)
-
-I apologize in advance for the following crappy build instructions.
-
-First, download the compressed source code for xfwm4: 
-xfwm4-4.15.1.tar.gz 
-from https://git.xfce.org/xfce/xfwm4/ and expand it.
-
-Use the following two lines in the terminal:
-'sudo apt-get update'
-'sudo apt-get install make xfce4-dev-tools libglib2.0-dev xorg-dev libpango1.0-dev libatk1.0-dev libepoxy-dev libatk-bridge2.0-dev libgtk-3-dev libxfce4util-dev libxfce4ui-2-dev libwnck-3-dev gawk libimlib2-dev'
-
-At this point, copy the provided source files (compositor.c, 
-screen.c, and screen.h) which are found at 
-/xfwm-effects-source/src to the xfwm4-4.xx.x/src folder. 
-  
-Copy the 'effects' source code folder and paste inside the  
-xfwm4-x.xx.x/settings-dialogs/ folder
-
-At the terminal, 'cd' into the expanded xfwm4 source code 
-folder (probably named 'xfwm4-4.15.1'), and 'sudo ./configure'
-
-Open the Makefile under src/ with an editor; add the 
-Imlib2 library to the end of this line:
-
-COMPOSITOR_LIBS = -lXcomposite -lXdamage -lXfixes
-
-so it looks like:
-
-COMPOSITOR_LIBS = -lXcomposite -lXdamage -lXfixes -lImlib2
-
-and save the change.
-
-Then, to build the hacked xfwm4, 'cd' into the main source 
-code folder (probably named 'xfwm4-4.15.1') and
-
-'sudo make && sudo make install'
-
-Next, to build the settings panel (optional) 'cd' into the 
-'settings-dialogs/effects' folder of the source code and  
-'sudo make && sudo make install' to compile the xfwm-effects 
-control panel.
-
-To start and use xfwm-effects, just go to '##Installation and 
-Usage' step 3 in this document.
-
 ## Known issues
 
 Shadows under windows are almost invisible when the slider for frame 
@@ -202,69 +158,4 @@ If you wish, you can then delete the "xfwm effects" version of xfwm4
 with:
 
 'sudo rm /usr/local/bin/xfwm4'
-
-## Changelog
-
-1.3 -updated for xfwm4 4.15.1 and Xubuntu 20.04
-    -removed clumsy polling of xfconf_settings
-    -fixed freeze caused by calling XQueryTree when tree is 
-     changing
-    -rewrote window painting code with fewer calls
-     to xlib
-    -note that settings behavior for 'transparency'
-     works a little truer to this paradigm now:
-     full effect <---------|---------> no effect
-
-1.2 updated for xfwm4 version 4.14.0 and Xubuntu 19.10
-
-1.1 added (experimental) option to use xlib instead of imlib2 for blur
-	in the settings app (however, it's slower and requires more cpu)
-
-1.0 initial release
-
-## Contact
-
-jnrh2001(at)yahoo(dot)com
-
-## License
-
-__Xfwm Effects__ License Info (= MIT License)
-
-Copyright 2020 James Hoover
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-__Xfwm4__ License Info
-
-Copied and pasted from the 'compositor.c' source code file...
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2, or (at your option)
-any later version.
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., Inc., 51 Franklin Street, Fifth Floor, Boston,
-MA 02110-1301, USA.
-xcompmgr - (c) 2003 Keith Packard
-metacity - (c) 2003, 2004 Red Hat, Inc.
-xfwm4    - (c) 2005-2015 Olivier Fourdan
-
-__Imlib2 License__
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies of the Software and its Copyright notices. In addition publicly documented acknowledgment must be given that this software has been used if no source code of this software is made available publicly. Making the source available publicly means including the source for this software with the distribution, or a method to get this software via some reasonable mechanism (electronic transfer via a network or media) as well as making an offer to supply the source on request. This Copyright notice serves as an offer to supply the source on on request as well. Instead of this, supplying acknowledgments of use of this software in either Copyright notices, Manuals, Publicity and Marketing documents or any documentation provided with any product containing this software. This License does not apply to any software that links to the libraries provided by this software (statically or dynamically), but only to the software provided.
-
-Please see the COPYING-PLAIN for a plain-english explanation of this notice and its intent.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
