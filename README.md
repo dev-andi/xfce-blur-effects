@@ -1,5 +1,6 @@
 # xfce-blur-effects
- 
+
+Note : ALl credits goes to Kalideva. This package is just a port of xfce-effects to Archlinux
  
  # Xfwm Effects 1.3
 
@@ -84,7 +85,10 @@ the above is just an example; your "user" is different!
 
 and type:
 
-sudo bash xfwm-effects-install.sh
+sudo bash xfwm-effects-install.sh 
+or
+
+sudo ./xfwm-effects-install.sh 
 
 then enter your password if prompted.
 
