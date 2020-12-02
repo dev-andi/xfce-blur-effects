@@ -9,6 +9,12 @@ All credits goes to Kalideva. This package is just a port of xfce-effects to Arc
 Visit : https://www.kalideva.com/ for more details. 
 
 I have included the below steps which is similar to the original package.
+
+## WARNING :
+If you run it without sudo privileges, the next time you reboot
+the entire WM would be gone and you'll only get black screen. 
+So be careful.
+
  
  # Xfwm Effects 1.3
 
@@ -99,9 +105,6 @@ not root
 -it will also install the imlib2 library, needed for image processing, 
 using apt-get (it may prompt you to type "y" for "yes" to approve this).
 
-## WARNING :
-If you run it without sudo privileges, the next time you reboot
-the entire WM would be gone and you'll only get black screen. 
 
 if OS is running on real hardware, log out and log back in at 
 this point. This action does not appear to be necessary when OS 
