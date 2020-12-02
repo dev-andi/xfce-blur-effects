@@ -99,6 +99,9 @@ not root
 -it will also install the imlib2 library, needed for image processing, 
 using apt-get (it may prompt you to type "y" for "yes" to approve this).
 
+Warning : if you run it without sudo privileges, the next time you reboot
+the entire WM would be gone and you'll only get black screen. 
+
 if OS is running on real hardware, log out and log back in at 
 this point. This action does not appear to be necessary when OS 
 is running on a virtual machine.
