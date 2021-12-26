@@ -16,7 +16,7 @@ the entire WM would be gone and you'll only get black screen.
 So be careful.
 
  
- # Xfwm Effects 1.3
+ # Xfwm Effects 1.5
 
 __Xfwm Effects__ adds depth and color harmony to the Xfce4 Desktop Environment 
 by modifying the Xfwm4 compositing window manager's code.

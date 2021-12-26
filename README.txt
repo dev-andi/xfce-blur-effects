@@ -1,49 +1,46 @@
-# Xfwm Effects 1.3
+# Xfwm Effects 1.5
 
-__Xfwm Effects__ adds depth and color harmony to the Xfce4 Desktop Environment 
+Xfwm Effects adds depth and color harmony to the Xfce4 Desktop Environment 
 by modifying the Xfwm4 compositing window manager's code.
 
 ## How it works
 
-Xfwm Effects adds depth and color harmony to the appearance of the desktop, 
-without adding distraction. It does so by creating an image of the desktop
-when necessary, then uses the Imlib2 library to blur the desktop image, then 
-uses Xlib compositing commands to composite the blurred background image onto 
-desktop windows, panels, menus, and popovers. The effect is reminiscent of 
-Apple's 'vibrancy' effect. Using this method sidesteps the computationally 
-expensive need to continually generate gaussian blur, which can slow the 
-responsiveness of the desktop environment.
+Xfwm Effects creates an image of the desktop when needed, blurs the 
+image, then composites the blurred image onto windows, panels, 
+menus, and popovers. The effect is reminiscent of Apple's 'vibrancy' 
+effect. Using this method sidesteps the computationally expensive need 
+to continually generate gaussian blur.
 
 ## A settings adjustment app is included
 
-Also included is an app (xfwm-effects) that allows the user to turn the effect 
-on and off, to adjust the amount of blur, and to adjust the amount of white 
-composited (for light themes). Note that to see the effects, 'Compositor > 
-Enable Display Compositing' must be selected (i.e., active) in the Window 
-Manager Tweaks app (the compositor is used to draw the effect). Adjusting the 
-sliders on the Compositor tab of the Window Manager Tweaks app toward 
-'Transparent' will make the effect more pronounced. On the other hand, if the 
-sliders on that tab are all slid to the 'Opaque' position, you will not see the 
-effect at all.
+Also included is the Xfwm Effects app (the binary is called "xfwm-effects") 
+that allows the user to turn the effect on and off, to adjust the amount 
+of blur, and to adjust the amount of color composited. 
+
+Note: to see the effects, 'Compositor > Enable Display Compositing' must 
+be enabled in the Window Manager Tweaks app (because the compositor is 
+used to draw the effect). 
+
+Adjusting the sliders on the Compositor tab of the Window Manager Tweaks 
+app toward 'Transparent' will make the effect more pronounced. Adjusting 
+the sliders toward 'Opaque' will lesson the effect.
 
 ## Additional effects
 
 Additional effects are possible via a file path setting that is accessible in 
-the xfce4-settings-editor app (channel: xfwm-effects, property: image-path). 
+the xfce4-settings-editor app (channel: xfwm-effects, property: /image-path). 
 This allows the user to specify an image to be composited over windows. For 
 example, the desktop background image might be a picture of a person, while 
 the composited background image might be a picture of a similarly positioned 
 skeleton, giving the windows an X-Ray effect. This effect cannot be combined 
-with the other 'blurred background' effect. Note that the X-Ray effect's file 
-path is ignored if the "Use xlib instead of imlib2..." option is selected 
-in the settings app.
+with the 'blurred background' effect.
 
 ## Works with:
 
-Xfwm4 version 4.15.1. Xfwm4 is the Xfce4 desktop environment's window 
-manager. 'xfce4-about' in a terminal to see what version you have.
+Xfwm4 version 4.16.x. Xfwm4 is the Xfce4 desktop environment's window 
+manager. Use 'xfce4-about' in a terminal to see what version you have.
 
-The installer script is written for Xubuntu 20.04; other distros will need 
+The installer script is written for Xubuntu 21.04; other distros will need 
 some massaging to get xfwm-effects to work.
 
 ## Included is:
@@ -60,8 +57,8 @@ Imlib2 (the libimlib2 package) for image processing
 Before you begin, run Software Updater and install any needed 
 updates.
 
-1) extract the archived folder (xfwm-effects.tar.gz) containing the 
-needed files, which include:
+1) extract the archived folder (xfwm-effects-install-x.x.tar.gz) 
+containing the needed files, which include:
 
 -README.txt
 -xfwm4
@@ -75,7 +72,7 @@ needed files, which include:
 2) open a terminal window, "cd" to the file path of the install folder you 
 just unarchived:
 
-cd /home/user/Downloads/xfwm-effects-install-1.3
+cd /home/user/Downloads/xfwm-effects-install-1.5
 
 the above is just an example; your "user" is different!
 
@@ -87,61 +84,88 @@ then enter your password if prompted.
 
 -this script will install the files; user password will be required if 
 not root
+
 -it will also install the imlib2 library, needed for image processing, 
-using apt-get (it may prompt you to type "y" for "yes" to approve this).
+using "apt-get install" (it may prompt you to type "y" for "yes" to 
+approve this).
 
 if Xubuntu is running on real hardware, log out and log back in at 
 this point. This action does not appear to be necessary when Xubuntu 
 is running on a virtual machine.
 
-3) now to start the effect, in a terminal window, type: 
+3) now, to start the effect, in a terminal window, type: 
 
 /usr/local/bin/xfwm4 --replace & disown
 
 Note: the 'replace' part exits the stock window manager (at /usr/bin) 
 and starts up the hacked version (at /usr/local/bin/); the 'disown' part 
-disconnects the new process from the terminal.
+disconnects the new process from the terminal so you can close it.
 
-4) start Window Manager Tweaks, select the Compositor tab, select Enable 
-Display Compositing, and move the sliders on that tab somewhat closer to 
-'Transparent' (since you will not see the effect when they are set at 
-'Opaque', which is the default position)
+Note the additional command line options for vertical sync:
 
-5) Xfwm Effects _works best with dark themes_ (selected in Appearance) 
+--vblank=off | xpresent | glx
+
+Apparently, the --vblank=xpresent option works best with Intel and 
+some AMD graphics chips.
+[Source: https://linuxreviews.org/Xfwm4_4.14.3_Is_Released_With_X-Resource_Extension_Support]
+
+4) start the Window Manager Tweaks app, select the Compositor tab, select 
+Enable Display Compositing, and move the sliders on that tab somewhat 
+closer to 'Transparent' (since you will *not* see the effect when they are 
+set at 'Opaque', which is the default position).
+
+Note: Xfwm Effects works best with dark themes (selected in Appearance) 
 and dark window frames (selected in Window Manager), so try these first.
 A good one is appearance: Adwaita-dark; window manager theme: Default.
 
-Note: keep the 'White amount' slider of the Xfwm Effects panel at zero for 
-all dark themes; keep the 'White amount' slider above zero for all light 
-themes. This is because the 'White amount' setting not only adjusts the 
-amount of white added, but also changes type type of compositing that is 
-done (one type favors light themes and one favors dark themes).
+5) Use the Xfwm Effects panel (found under Settings in the Whisker menu)
+to adjust blur strengh, and color blend. 
 
-Also note: some apps have their own transparency settings, such as Whisker 
-menu and the Xfce4 panel. Changing the 'opacity' level for these apps in 
-their properties settings will adjust the effect.
+Note: It is recommended to keep the 'Color amount' slider of the 
+Xfwm Effects panel at zero for dark themes; keep the 'Color amount' 
+slider above zero for light themes. This is because the 'Color amount' 
+setting not only adjusts the amount of color added (select the color 
+using the 'Blend Color' button), but also changes type type of 
+compositing that is done (one type favors light themes and one favors 
+dark themes).
 
-## How to build from source code (for xfwm4 4.15.1 on Xubuntu 20.04)
+IMPORTANT: some apps have their own transparency settings, such as 
+the Whisker menu, the Xfce4 panel, and the Terminal. Changing the 
+'opacity' level for these apps in their properties settings will 
+adjust the effect.
+
+## How to build from source code (for xfwm4 4.16.1 on Xubuntu 21.04)
 
 I apologize in advance for the following crappy build instructions.
 
 First, download the compressed source code for xfwm4: 
-xfwm4-4.15.1.tar.gz 
-from https://git.xfce.org/xfce/xfwm4/ and expand it.
+xfwm4-4.16.1.tar.gz from
+https://archive.xfce.org/src/xfce/xfwm4/ by selecting the appropriate 
+version, downloading the tarball, and expanding it.
 
 Use the following two lines in the terminal:
 'sudo apt-get update'
-'sudo apt-get install make xfce4-dev-tools libglib2.0-dev xorg-dev libpango1.0-dev libatk1.0-dev libepoxy-dev libatk-bridge2.0-dev libgtk-3-dev libxfce4util-dev libxfce4ui-2-dev libwnck-3-dev gawk libimlib2-dev'
+'sudo apt-get install make xfce4-dev-tools libglib2.0-dev xorg-dev libpango1.0-dev libatk1.0-dev libepoxy-dev libatk-bridge2.0-dev libgtk-3-dev libxfce4util-dev libxfce4ui-2-dev libwnck-3-dev gawk libimlib2-dev libxpresent-dev'
 
-At this point, copy the provided source files (compositor.c, 
-screen.c, and screen.h) which are found at 
-/xfwm-effects-source/src to the xfwm4-4.xx.x/src folder. 
+[Note: if support for xpresent is not needed, remove 'libxpresent-dev' 
+from the above list.]
+
+At this point, copy the provided source files (compositor.c, screen.c, 
+and screen.h) which are found at /xfwm-effects-source/src to the 
+xfwm4-4.xx.x/src folder. 
   
-Copy the 'effects' source code folder and paste inside the  
-xfwm4-x.xx.x/settings-dialogs/ folder
+Copy the entire 'effects' source code folder found inside the 
+'settings-dialogs' folder and paste it inside the 
+xfwm4-4.xx.x/settings-dialogs/ folder
 
 At the terminal, 'cd' into the expanded xfwm4 source code 
-folder (probably named 'xfwm4-4.15.1'), and 'sudo ./configure'
+folder (probably named 'xfwm4-4.16.1'), and 
+'sudo ./autogen.sh --enable-xpresent'
+
+[Note Well: ./autogen.sh above might need to be ./configure instead 
+depending on the branch and version!]
+
+[Note: if support for xpresent is not needed, use 'sudo ./autogen.sh']
 
 Open the Makefile under src/ with an editor; add the 
 Imlib2 library to the end of this line:
@@ -152,32 +176,36 @@ so it looks like:
 
 COMPOSITOR_LIBS = -lXcomposite -lXdamage -lXfixes -lImlib2
 
-and save the change.
+and save the change. If the file is write-protected, save to
+'Makefile2'; then 'rm Makefile' and 'mv Makefile2 Makefile'.
 
 Then, to build the hacked xfwm4, 'cd' into the main source 
-code folder (probably named 'xfwm4-4.15.1') and
+code folder (probably named 'xfwm4-4.16.x') and
 
 'sudo make && sudo make install'
 
-Next, to build the settings panel (optional) 'cd' into the 
+Next, to build the settings panel, 'cd' into the 
 'settings-dialogs/effects' folder of the source code and  
 'sudo make && sudo make install' to compile the xfwm-effects 
 control panel.
 
-To start and use xfwm-effects, just go to '##Installation and 
-Usage' step 3 in this document.
+To start and use xfwm-effects, go to '##Installation and 
+Usage' step 3 in this document. You'll have to change some 
+settings to really see the effect.
 
 ## Known issues
+
+A couple of people reported that Xfwm Effects ran very slow on their 
+graphics cards, even when the effect is off (which should just run 
+the unmodified, original code). I don't have an explanation. See the 
+'Reverting' section just below for instructions on how to restart 
+the original Xfce window manager. Also see the note about the 
+--vblank command line option under step 3 above.
 
 Shadows under windows are almost invisible when the slider for frame 
 opaqueness in Window Manager Tweaks is set closer to the 'Transparent' 
 setting, so you probably won't see shadows under the windows when the 
 effect is active.
-
-X-Ray effect file path is ignored if "Use xlib instead of imlib2..." 
-setting is selected in the settings app. Also, "Use xlib instead of 
-imlib2..." will not work if imlib2 is not installed because imlib2
-is not loaded conditionally.
 
 ## Troubleshooting / Reverting
 
@@ -196,8 +224,29 @@ with:
 
 'sudo rm /usr/local/bin/xfwm4'
 
+If the revised window manager is truly borked for some reason, as a 
+last resort, go to tty2 (control+alt+F2), then log in, then do 
+'sudo rm /usr/local/bin/xfwm4' and 
+'sudo systemctl restart display-manager' to restart the display 
+server so that the original window manager will take over.
+
 ## Changelog
 
+1.5.0
+	-updated to xfwm4 4.16.1 and Xubuntu 21.04
+	-removed "Use Xlib Only" option from Xfwm Effects panel
+	-removed some dead code
+
+1.4.1
+	-fixed a problem where the xfwm-effects panel controls
+	 would be inaccurate on first run
+1.4 -updated to xfwm4 4.15.3 and Xubuntu 20.10
+	-the Xfwm Effects panel now lets you select a color to blend 
+     with light window themes (formerly the blend color was 
+     limited to white)
+	-build instructions now include xpresent support (for, 
+     for example, vertical sync on Intel graphics)
+ 
 1.3 -updated for xfwm4 4.15.1 and Xubuntu 20.04
     -removed clumsy polling of xfconf_settings
     -fixed freeze caused by calling XQueryTree when tree is 
@@ -223,7 +272,7 @@ jnrh2001(at)yahoo(dot)com
 
 __Xfwm Effects__ License Info (= MIT License)
 
-Copyright 2020 James Hoover
+Copyright 2021 James Hoover
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -249,7 +298,7 @@ Foundation, Inc., Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA 02110-1301, USA.
 xcompmgr - (c) 2003 Keith Packard
 metacity - (c) 2003, 2004 Red Hat, Inc.
-xfwm4    - (c) 2005-2015 Olivier Fourdan
+xfwm4    - (c) 2005-2020 Olivier Fourdan
 
 __Imlib2 License__
 

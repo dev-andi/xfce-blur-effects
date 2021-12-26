@@ -102,8 +102,8 @@ myScreenSetWMAtom (ScreenInfo *screen_info, gboolean replace_wm)
     {
         if (!replace_wm)
         {
-            g_message ("Another Window Manager (%s) is already running on screen %s", wm_name, display_name);
-            g_message ("To replace the current window manager, try \"--replace\"");
+            g_print ("Another Window Manager (%s) is already running on screen %s\n", wm_name, display_name);
+            g_print ("To replace the current window manager, try \"--replace\"\n");
             g_free (display_name);
 
             return FALSE;
@@ -338,7 +338,10 @@ myScreenInit (DisplayInfo *display_info, GdkScreen *gscr, unsigned long event_ma
     myScreenRebuildMonitorIndex (screen_info);
 
     // effect: begin //
-    
+
+	//to initialize blend_color
+    GdkRGBA white_color = { (gdouble) 1.0, (gdouble) 1.0, (gdouble) 1.0, (gdouble) 1.0 };
+
     screen_info->effect_picture = None;
     screen_info->old_ws = None;
     screen_info->old_focused = None;
@@ -348,9 +351,10 @@ myScreenInit (DisplayInfo *display_info, GdkScreen *gscr, unsigned long event_ma
     screen_info->effect_updated = FALSE;
     screen_info->effect_update_needed = FALSE;
     screen_info->image_path = "\0";
-    screen_info->xlib_only = FALSE;
+    screen_info->blend_color = white_color;
 
     // effect: end //
+
     return (screen_info);
 }
 

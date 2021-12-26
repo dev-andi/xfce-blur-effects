@@ -93,14 +93,18 @@ struct _ScreenInfo
     DisplayInfo *display_info;
 
     // effect: begin
+    
     Picture effect_picture; // processed image for compositor to use for effects
     guint old_ws; // workspace comparator
     Window old_focused; // focused (input) window comparator
     gboolean use_effect; // switch effect on and off
     gint blur_amount, white_amount;
-    gboolean effect_updated, effect_update_needed, xlib_only;
+    gboolean effect_updated, effect_update_needed;
     gchar *image_path;
+    GdkRGBA blend_color;
+    
     // effect: end //
+    
     /* Window stacking, per screen */
     GList *windows_stack;
     Client *last_raise;
@@ -124,7 +128,6 @@ struct _ScreenInfo
     GC box_gc;
 
     /* Title font */
-    gint font_height;
     PangoFontDescription *font_desc;
     PangoAttrList *pango_attr_list;
 
@@ -198,6 +201,7 @@ struct _ScreenInfo
     Window root_overlay;
 #endif
     GList *cwindows;
+    GHashTable *cwindow_hash;
     Window output;
 
     gaussian_conv *gaussianMap;
@@ -206,12 +210,14 @@ struct _ScreenInfo
     guchar *shadowTop;
 
     gushort current_buffer;
+    gushort use_n_buffers;
     Pixmap rootPixmap[N_BUFFERS];
     Picture rootBuffer[N_BUFFERS];
     Picture zoomBuffer;
     Picture rootPicture;
     Picture blackPicture;
     Picture rootTile;
+    XserverRegion screenRegion;
     XserverRegion prevDamage;
     XserverRegion allDamage;
     unsigned long cursorSerial;
@@ -219,6 +225,7 @@ struct _ScreenInfo
     gint cursorOffsetX;
     gint cursorOffsetY;
     XRectangle cursorLocation;
+    gboolean cursor_is_zoomed;
 
     guint wins_unredirected;
     gboolean compositor_active;
@@ -238,16 +245,20 @@ struct _ScreenInfo
 
 #ifdef HAVE_EPOXY
     gboolean texture_inverted;
+    gboolean has_mesa_swap_control;
+    gboolean has_ext_swap_control;
+    gboolean has_ext_arb_sync;
 
     GLuint rootTexture;
     GLenum texture_format;
     GLenum texture_target;
     GLenum texture_type;
     GLfloat texture_filter;
-    GLXDrawable glx_drawable;
+    GLXDrawable glx_drawable[N_BUFFERS];
     GLXFBConfig glx_fbconfig;
     GLXContext glx_context;
     GLXWindow glx_window;
+    GLsync gl_sync;
 #ifdef HAVE_XSYNC
     XSyncFence fence[N_BUFFERS];
 #endif /* HAVE_XSYNC */
