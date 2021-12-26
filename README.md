@@ -58,7 +58,7 @@ in the settings app.
 
 ## Works with:
 
-Xfwm4 version 4.15.1. Xfwm4 is the Xfce4 desktop environment's window 
+Xfwm4 version 4.16. Xfwm4 is the Xfce4 desktop environment's window 
 manager. 'xfce4-about' in a terminal to see what version you have.
 
 ## Included is:
