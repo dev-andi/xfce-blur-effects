@@ -1,13 +1,11 @@
 #!/bin/bash
-# INSTALLER SCRIPT FOR Pentux; OTHER DISTROS WILL NEED CHANGES TO SCRIPT ETC.
+# INSTALLER SCRIPT FOR XUBUNTU; OTHER DISTROS WILL NEED CHANGES TO SCRIPT ETC.
 # this script installs a hacked xfwm window manager to usr/local/bin 
 # (the hack allows for translucency effects); it also installs an app 
 # called xfwm-effects to adjust the effect settings
-## Note: this is a shameless copy of Kalideva's xfwm-effect with slight modification for arch-linux
-## script must run with root-privileges
 
 echo "----------------------------------------------------------"
-echo "Xfce Effects (v.1.3) Install Script for Pentux OS"
+echo "Xfce Effects (v.1.5.0) Install Script for Xubuntu 21.04"
 echo "Installing xfwm translucency hack and xfwm-effects panel..."
 echo "----------------------------------------------------------"
 
@@ -41,8 +39,8 @@ echo "----------------------------------------------------------"
 
 # the blur effects are created by Imlib2 library
 
-sudo pacman -Syu imlib2
-
+sudo apt-get update
+sudo apt-get install libimlib2
 
 echo " "
 echo "----------------------------------------------------------"

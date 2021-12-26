@@ -1,6 +1,6 @@
 /*
 
-Copyright 2020 James Hoover
+Copyright 2021 James Hoover
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 
 of this software and associated documentation files (the "Software"), to deal 
@@ -32,28 +32,35 @@ effects_configure_widgets (GtkBuilder *builder)
 {
     XfconfChannel *window_effects = xfconf_channel_new ("xfwm-effects");
     
-    GtkWidget *use_xlib_only = GTK_WIDGET (gtk_builder_get_object 
-            (builder, "use_xlib_only"));
     GtkWidget *use_effects_check = GTK_WIDGET (gtk_builder_get_object 
             (builder, "use_effects_check"));
     GtkWidget *blur_amount_scale = GTK_WIDGET (gtk_builder_get_object 
             (builder, "blur_amount_scale"));
     GtkWidget *white_amount_scale = GTK_WIDGET (gtk_builder_get_object 
             (builder, "white_amount_scale"));
+    GtkWidget *effect_color_button = GTK_WIDGET (gtk_builder_get_object 
+            (builder, "effect_color_button"));
     
     gint blur_value = 99;
-    if(xfconf_channel_has_property(window_effects, "/blur-amount"))
-    {
+    //if(!xfconf_channel_has_property(window_effects, "/blur-amount"))
+    //{
         blur_value = xfconf_channel_get_int(window_effects, "/blur-amount", 100);
         gtk_range_set_value(GTK_RANGE(blur_amount_scale), blur_value);
-    }
+    //}
         
     gint white_value = 0;
-    if(xfconf_channel_has_property(window_effects, "/white-amount"))
-    {
+    //if(!xfconf_channel_has_property(window_effects, "/white-amount"))
+    //{
         white_value = xfconf_channel_get_int(window_effects, "/white-amount", 0);
         gtk_range_set_value(GTK_RANGE(white_amount_scale), white_value);
-    }
+    //}
+	
+	gboolean effect_active = TRUE;
+    //if(!xfconf_channel_has_property(window_effects, "/effect-active"))
+    //{
+        effect_active = xfconf_channel_get_bool(window_effects, "/effect-active", TRUE);
+        gtk_switch_set_state( (GtkSwitch *) use_effects_check, effect_active);
+    //}
 
     //NOTE: bindings bind settings both ways!
 
@@ -62,14 +69,7 @@ effects_configure_widgets (GtkBuilder *builder)
     xfconf_g_property_bind (window_effects,
                             "/effect-active",
                             G_TYPE_BOOLEAN,
-                            (GObject *)use_effects_check, "active");
-                            
-   // this setting causes use of alternate code which does downscaling/upscaling
-   // and blur without using imlib2 library                         
-   xfconf_g_property_bind (window_effects,
-                            "/xlib-only",
-                            G_TYPE_BOOLEAN,
-                            (GObject *)use_xlib_only, "active");
+                            G_OBJECT(use_effects_check), "active");
                             
     GtkAdjustment *adj_blur = 
             gtk_range_get_adjustment(GTK_RANGE(blur_amount_scale));
@@ -93,6 +93,11 @@ effects_configure_widgets (GtkBuilder *builder)
                             "/general/use_compositing",
                             G_TYPE_BOOLEAN,
                             (GObject *)compositor_is_off_label, "visible"); */
+	
+	xfconf_g_property_bind_gdkrgba(window_effects, 
+								"/effect-color", 
+								G_OBJECT(effect_color_button), 
+								"rgba");   
 }
 
 int main(int argc, char *argv[])
@@ -106,8 +111,8 @@ int main(int argc, char *argv[])
     // report version number
     if(argc > 1 && (!strcmp(argv[1],"-version") || !strcmp(argv[1],"--V")))
     {
-        g_print("%s\n", "Xfwm Effects version 1.3");
-        g_print("%s\n", "Copyright (c) 2020 James Hoover");
+        g_print("%s\n", "Xfwm Effects version 1.5.0");
+        g_print("%s\n", "Copyright (c) 2021 James Hoover");
         g_print("\n");
         return 0;
     }
@@ -129,7 +134,9 @@ int main(int argc, char *argv[])
  
     window = GTK_WIDGET(gtk_builder_get_object(builder, "xfwm_effects"));
     
-    gtk_window_set_title (GTK_WINDOW (window), "Window Effects");
+    gtk_window_set_title (GTK_WINDOW (window), "Xfwm Effects");
+ 
+    gtk_widget_show(window);  
      
     gtk_builder_connect_signals(builder, NULL);
     
@@ -139,9 +146,7 @@ int main(int argc, char *argv[])
     }
      
     g_object_unref(builder);
- 
-    gtk_widget_show(window);  
-                  
+                       
     gtk_main();
     
     xfconf_shutdown ();

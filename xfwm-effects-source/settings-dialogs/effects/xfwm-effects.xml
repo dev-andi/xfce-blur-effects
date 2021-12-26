@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<channel name="xfwm-effects" version="1.3">
+<channel name="xfwm-effects" version="1.4">
   <property name="effect-active" type="bool" value="true"/>
   <property name="blur-amount" type="int" value="100"/>
   <property name="white-amount" type="int" value="0"/>
   <property name="image-path" type="string" value=""/>
-  <property name="xlib-only" type="bool" value="false"/>
 </channel>

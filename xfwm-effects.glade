@@ -1,43 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
   <object class="GtkAdjustment" id="blur_amount_adjustment">
     <property name="upper">101</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">1</property>
-    <property name="page_size">1</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">1</property>
+    <property name="page-size">1</property>
   </object>
   <object class="GtkAdjustment" id="white_amount_adjustment">
     <property name="upper">101</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">1</property>
-    <property name="page_size">1</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">1</property>
+    <property name="page-size">1</property>
   </object>
   <object class="GtkWindow" id="xfwm_effects">
-    <property name="can_focus">False</property>
-    <property name="default_width">400</property>
-    <property name="default_height">200</property>
+    <property name="can-focus">False</property>
+    <property name="default-width">400</property>
+    <property name="default-height">200</property>
     <signal name="destroy" handler="on_xfwm_effects_destroy" swapped="no"/>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="spacing">1</property>
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="halign">start</property>
-                <property name="margin_left">20</property>
+                <property name="margin-left">20</property>
                 <property name="label" translatable="yes">Window Effects</property>
                 <attributes>
                   <attribute name="weight" value="bold"/>
@@ -53,9 +50,9 @@
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_right">20</property>
-                <property name="label" translatable="yes">Version 1.3</property>
+                <property name="can-focus">False</property>
+                <property name="margin-right">20</property>
+                <property name="label" translatable="yes">Version 1.5.0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -74,34 +71,53 @@
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-left">20</property>
+                <property name="margin-top">5</property>
+                <property name="margin-bottom">6</property>
+                <property name="label" translatable="yes">Effects active</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkSwitch" id="use_effects_check">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="can-focus">True</property>
                 <property name="halign">start</property>
                 <property name="valign">start</property>
-                <property name="margin_left">20</property>
+                <property name="margin-left">20</property>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="halign">start</property>
-                    <property name="margin_left">20</property>
-                    <property name="margin_top">16</property>
+                    <property name="margin-left">20</property>
+                    <property name="margin-top">16</property>
                     <property name="label" translatable="yes">Blur amount</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
@@ -116,82 +132,19 @@
                 <child>
                   <object class="GtkScale" id="blur_amount_scale">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="margin_left">20</property>
-                    <property name="margin_right">20</property>
-                    <property name="margin_bottom">5</property>
+                    <property name="can-focus">True</property>
+                    <property name="margin-left">20</property>
+                    <property name="margin-right">20</property>
+                    <property name="margin-bottom">5</property>
                     <property name="adjustment">blur_amount_adjustment</property>
-                    <property name="round_digits">1</property>
+                    <property name="round-digits">1</property>
                     <property name="digits">0</property>
-                    <property name="value_pos">right</property>
+                    <property name="value-pos">right</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="margin_left">20</property>
-                    <property name="label" translatable="yes">White amount</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkScale" id="white_amount_scale">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="margin_left">20</property>
-                    <property name="margin_right">20</property>
-                    <property name="margin_bottom">5</property>
-                    <property name="adjustment">white_amount_adjustment</property>
-                    <property name="round_digits">1</property>
-                    <property name="digits">0</property>
-                    <property name="value_pos">right</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="pack_type">end</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="margin_left">20</property>
-                    <property name="margin_top">3</property>
-                    <property name="label" translatable="yes">Set 'White amount' to zero for dark themes.</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
@@ -204,15 +157,21 @@
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkColorButton" id="effect_color_button">
+                    <property name="width-request">200</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
                     <property name="halign">start</property>
-                    <property name="margin_left">20</property>
-                    <property name="label" translatable="yes">Use xlib instead of imlib2 for scaling and bluring (experimental)</property>
+                    <property name="margin-left">20</property>
+                    <property name="margin-right">20</property>
+                    <property name="margin-top">5</property>
+                    <property name="margin-bottom">20</property>
+                    <property name="hexpand">True</property>
+                    <property name="rgba">rgb(255,255,255)</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -221,18 +180,71 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSwitch" id="use_xlib_only">
+                  <object class="GtkScale" id="white_amount_scale">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="halign">start</property>
-                    <property name="valign">start</property>
-                    <property name="margin_left">20</property>
+                    <property name="can-focus">True</property>
+                    <property name="margin-left">20</property>
+                    <property name="margin-right">20</property>
+                    <property name="margin-bottom">5</property>
+                    <property name="adjustment">white_amount_adjustment</property>
+                    <property name="round-digits">1</property>
+                    <property name="digits">0</property>
+                    <property name="value-pos">right</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="padding">3</property>
+                    <property name="fill">True</property>
+                    <property name="pack-type">end</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="margin-left">20</property>
+                    <property name="label" translatable="yes">Blend color</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="margin-left">20</property>
+                    <property name="label" translatable="yes">Color amount</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="margin-left">20</property>
+                    <property name="margin-top">3</property>
+                    <property name="label" translatable="yes">Set 'Color amount' to zero for dark themes.</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">4</property>
                   </packing>
                 </child>
               </object>
@@ -253,29 +265,29 @@
           <object class="GtkButton">
             <property name="label" translatable="yes">Close</property>
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="halign">end</property>
             <property name="valign">end</property>
-            <property name="margin_right">8</property>
-            <property name="margin_top">8</property>
-            <property name="margin_bottom">8</property>
-            <property name="image_position">bottom</property>
+            <property name="margin-right">8</property>
+            <property name="margin-top">8</property>
+            <property name="margin-bottom">8</property>
+            <property name="image-position">bottom</property>
             <signal name="clicked" handler="on_xfwm_effects_destroy" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="pack_type">end</property>
+            <property name="pack-type">end</property>
             <property name="position">2</property>
           </packing>
         </child>
         <child>
           <object class="GtkLabel">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">20</property>
-            <property name="margin_right">20</property>
+            <property name="can-focus">False</property>
+            <property name="margin-left">20</property>
+            <property name="margin-right">20</property>
             <property name="label" translatable="yes">Note: to see the effects, 'Compositor &gt; Enable Display Compositing' must be selected in the Window Manager Tweaks app.</property>
             <property name="wrap">True</property>
             <attributes>
