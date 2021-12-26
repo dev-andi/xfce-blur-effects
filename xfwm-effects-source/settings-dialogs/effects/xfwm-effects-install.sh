@@ -39,8 +39,7 @@ echo "----------------------------------------------------------"
 
 # the blur effects are created by Imlib2 library
 
-sudo apt-get update
-sudo apt-get install libimlib2
+sudo pacman -Syu imlib2
 
 echo " "
 echo "----------------------------------------------------------"
